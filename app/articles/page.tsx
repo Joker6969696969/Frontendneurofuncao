@@ -66,7 +66,7 @@ export default function ArticlesPage() {
   const categories = [
     { id: "all", name: t("articles.categories.all") },
     { id: "neurology", name: t("articles.categories.neurology") },
-    { id: "physiotherapy", name: "Fisioterapia" }, // Use hardcoded for now if not in translations
+    { id: "physiotherapy", name: t("articles.categories.physiotherapy") }, // Use hardcoded for now if not in translations
     { id: "development", name: t("articles.categories.development") },
     { id: "research", name: t("articles.categories.research") },
   ]
@@ -176,8 +176,10 @@ export default function ArticlesPage() {
                   </div>
                 </div>
                 <Button className="w-fit bg-gradient-to-r from-orange-500 to-teal-500 hover:from-orange-600 hover:to-teal-600">
-                  {t("articles.readFull")}
-                  <ArrowRight className="h-4 w-4 ml-2" />
+                  <Link href={`/articles/${filteredArticles[0].id}`}>
+                    {t("articles.readFull")}
+                    <ArrowRight className="h-4 w-4 ml-2" />
+                  </Link>
                 </Button>
               </div>
             </div>
@@ -233,8 +235,10 @@ export default function ArticlesPage() {
                     {article.read_time} {t("articles.readTime")} {/* Changed to read_time */}
                   </span>
                   <Button variant="ghost" size="sm" className="p-0 h-auto text-orange-600 hover:text-orange-700">
-                    {t("articles.readMore")}
-                    <ArrowRight className="h-3 w-3 ml-1" />
+                    <Link href={`/articles/${article.id}`}>
+                      {t("articles.readMore")}
+                      <ArrowRight className="h-3 w-3 ml-1" />
+                    </Link>
                   </Button>
                 </div>
               </CardContent>

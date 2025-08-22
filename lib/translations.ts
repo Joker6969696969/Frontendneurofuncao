@@ -174,7 +174,9 @@ export const translations = {
         placeholder: "Seu e-mail",
         button: "Inscrever-se",
       },
-      loading: "Carregando artigos...", // New
+      loading: "Carregando artigos...",
+      notFound: "Artigo não encontrado.",
+      backToAll: "Voltar para todos os artigos",
     },
     // Footer
     footer: {
@@ -423,7 +425,9 @@ export const translations = {
         placeholder: "Your email",
         button: "Subscribe",
       },
-      loading: "Loading articles...", // New
+      loading: "Loading articles...",
+      notFound: "Article not found.",
+      backToAll: "Back to all articles",
     },
     // Footer
     footer: {
