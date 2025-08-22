@@ -1,110 +1,110 @@
-"use server"
+// app/articles/admin/actions.ts
+// CLIENT-SIDE helpers for the Admin UI (fetch the Laravel API)
+import { API_BASE_URL } from "@/lib/constants"; // make sure this resolves to the public URL or use process.env.NEXT_PUBLIC_API_BASE_URL
+import type { Article } from "@/lib/types";
 
-import { revalidatePath } from "next/cache"
-import { API_BASE_URL } from "@/lib/constants"
-import type { Article } from "@/lib/types" // Import the new Article type
+function getBaseUrl() {
+  // Prefer env var exposed to client
+  return (process.env.NEXT_PUBLIC_API_BASE_URL ?? API_BASE_URL) as string;
+}
 
-// Helper to create authenticated fetch requests
-async function authenticatedFetch(url: string, options: RequestInit, token: string) {
-  const headers = {
-    ...options.headers,
-    "Content-Type": "application/json",
-    Authorization: `Bearer ${token}`,
-  }
+async function handleResponse(response: Response) {
+  const text = await response.text();
   try {
-    const response = await fetch(url, { ...options, headers })
+    const json = JSON.parse(text);
+    if (!response.ok) throw new Error(json.message || JSON.stringify(json));
+    return json;
+  } catch (err) {
+    // If not JSON, rethrow a useful error containing the raw text
     if (!response.ok) {
-      const errorData = await response.json()
-      console.error(`API Error (${response.status} ${response.statusText}):`, errorData) // Detailed error log
-      throw new Error(errorData.message || "API request failed")
+      throw new Error(text || `Request failed with status ${response.status}`);
     }
-    return response.json()
+    // else parse succeeded earlier
+    return JSON.parse(text);
+  }
+}
+
+async function authenticatedFetch(url: string, options: RequestInit = {}, token?: string) {
+  const headers = {
+    "Content-Type": "application/json",
+    Accept: "application/json",
+    ...(options.headers || {}),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+
+  try {
+    const response = await fetch(url, { ...options, headers });
+    return await handleResponse(response);
   } catch (error: any) {
-    console.error("Network or API call error:", error); // Log network errors
-    throw error; // Re-throw to be caught by the calling action
+    console.error("Network/API error in authenticatedFetch:", error);
+    throw error;
   }
 }
 
 export async function getArticles(): Promise<Article[]> {
+  const base = getBaseUrl();
   try {
-    const response = await fetch(`${API_BASE_URL}/articles`, {
-      next: { tags: ["articles"] }, // Tag for revalidation
-    })
-    if (!response.ok) {
-      const errorText = await response.text();
-      console.error(`Public API Error (${response.status} ${response.statusText}):`, errorText); // Detailed error log
-      throw new Error(`Failed to fetch articles: ${response.status} ${response.statusText}`);
-    }
-    return response.json()
-  } catch (error: any) {
-    console.error("Error in getArticles (public fetch):", error); // Log network errors for public fetch
-    throw new Error("Failed to fetch articles. Please check your network connection and API_BASE_URL.");
+    const res = await fetch(`${base}/articles`, {
+      // avoid caching in dev; remove next option for pure client fetch
+      cache: "no-cache",
+    });
+    return (await handleResponse(res)) as Article[];
+  } catch (err: any) {
+    console.error("getArticles error:", err);
+    throw new Error("Failed to fetch articles. " + (err.message || ""));
   }
 }
 
-export async function addArticle(formData: FormData, token: string) {
-  const newArticle: Omit<Article, "id"> = {
-    title: formData.get("title") as string,
-    excerpt: formData.get("excerpt") as string,
-    body: formData.get("body") as string, // Added body
-    category: formData.get("category") as string,
-    author: formData.get("author") as string,
-    published_at: formData.get("published_at") as string, // Renamed from date
-    read_time: Number.parseInt(formData.get("read_time") as string), // Renamed from readTime, parsed to int
-    image_url: formData.get("image_url") as string, // Renamed from image
-  }
+export async function addArticle(formData: FormData | Omit<Article, "id">, token?: string) {
+  // Accept either FormData (from old code) or a plain JS object
+  const base = getBaseUrl();
+  const payload =
+    formData instanceof FormData
+      ? JSON.parse(
+          JSON.stringify(
+            Object.fromEntries(
+              Array.from(formData.entries()).map(([k, v]) => [k, typeof v === "string" ? v : String(v)])
+            )
+          )
+        )
+      : formData;
 
   try {
-    await authenticatedFetch(
-      `${API_BASE_URL}/articles`,
-      {
-        method: "POST",
-        body: JSON.stringify(newArticle),
-      },
-      token,
-    )
-    revalidatePath("/articles/admin")
-    revalidatePath("/articles")
-    return { success: true, message: "Article added successfully!" }
-  } catch (error: any) {
-    console.error("Error in addArticle:", error); // Log error for addArticle
-    return { success: false, message: error.message || "Failed to add article." }
+    await authenticatedFetch(`${base}/articles`, {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }, token);
+    // caller handles re-fetching / UI changes
+    return { success: true, message: "Article added successfully!" };
+  } catch (err: any) {
+    console.error("addArticle error:", err);
+    return { success: false, message: err.message || "Failed to add article." };
   }
 }
 
-export async function updateArticle(article: Article, token: string) {
+export async function updateArticle(article: Article, token?: string) {
+  const base = getBaseUrl();
   try {
-    await authenticatedFetch(
-      `${API_BASE_URL}/articles/${article.id}`,
-      {
-        method: "PUT",
-        body: JSON.stringify(article),
-      },
-      token,
-    )
-    revalidatePath("/articles/admin")
-    revalidatePath("/articles")
-    return { success: true, message: "Article updated successfully!" }
-  } catch (error: any) {
-    console.error("Error in updateArticle:", error); // Log error for updateArticle
-    return { success: false, message: error.message || "Failed to update article." }
+    await authenticatedFetch(`${base}/articles/${article.id}`, {
+      method: "PUT",
+      body: JSON.stringify(article),
+    }, token);
+    return { success: true, message: "Article updated successfully!" };
+  } catch (err: any) {
+    console.error("updateArticle error:", err);
+    return { success: false, message: err.message || "Failed to update article." };
   }
 }
 
-export async function deleteArticle(id: string, token: string) {
+export async function deleteArticle(id: string, token?: string) {
+  const base = getBaseUrl();
   try {
-    await authenticatedFetch(
-      `${API_BASE_URL}/articles/${id}`,
-      {
-        method: "DELETE",
-      },
-      token,
-    )
-    revalidatePath("/articles/admin")
-    revalidatePath("/articles")
-    return { success: true, message: "Article deleted successfully!" }
-  } catch (error: any) {
-    console.error("Error in deleteArticle:", error); // Log error for deleteArticle
-    return { success: false, message: error.message || "Failed to delete article." }
+    await authenticatedFetch(`${base}/articles/${id}`, {
+      method: "DELETE",
+    }, token);
+    return { success: true };
+  } catch (err: any) {
+    console.error("deleteArticle error:", err);
+    return { success: false, message: err.message || "Failed to delete article." };
   }
 }

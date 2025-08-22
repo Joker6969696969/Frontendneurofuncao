@@ -9,6 +9,8 @@ import { Calendar, User, ArrowRight } from 'lucide-react'
 import { useLanguage } from "@/contexts/language-context"
 import { API_BASE_URL } from "@/lib/constants"
 import type { Article } from "@/lib/types"
+import Link from "next/link"
+
 
 export default function ArticlesPage() {
   const { t } = useLanguage()

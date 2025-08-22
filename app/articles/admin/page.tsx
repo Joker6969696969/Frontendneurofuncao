@@ -185,7 +185,7 @@ function AdminArticlesContent() {
                       <DialogTitle>{t("admin.articles.editArticle")}</DialogTitle>
                       <DialogDescription>{t("admin.articles.editArticleDescription")}</DialogDescription>
                     </DialogHeader>
-                    <ArticleForm initialData={editingArticle} onSuccess={handleEditSuccess} />
+                    <ArticleForm initialData={editingArticle ?? undefined} onSuccess={handleEditSuccess} />
                   </DialogContent>
                 </Dialog>
                 <Button variant="destructive" size="sm" className="flex-1" onClick={() => handleDelete(article.id)}>
