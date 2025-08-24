@@ -20,7 +20,7 @@ export default function Footer() {
               alt="Neurofunção"
               width={200}
               height={60}
-              className="h-12 w-auto mb-4 brightness-0 invert"
+              className="h-12 w-auto mb-4"
             />
             <p className="text-gray-300 mb-4 leading-relaxed">{t("home.hero.description")}</p>
           </div>

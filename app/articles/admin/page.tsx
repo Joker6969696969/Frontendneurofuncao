@@ -133,18 +133,22 @@ function AdminArticlesContent() {
 
   return (
     <>
-      <div className="text-center mb-16">
+      <div className="text-center mb-16 mt-12 sm:mt-16">
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{t("admin.articles.title")}</h1>
         <p className="text-xl text-gray-600">{t("admin.articles.subtitle")}</p>
       </div>
 
-      <div className="mb-8 flex justify-end">
+      <div className="mb-8 flex justify-center">
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-gradient-to-r from-orange-500 to-teal-500 hover:from-orange-600 hover:to-teal-600">
-              <PlusCircle className="h-5 w-5 mr-2" />
-              {t("admin.articles.addArticle")}
-            </Button>
+          <Button
+  size="lg"
+  className="bg-gradient-to-r from-orange-500 to-teal-500 hover:from-orange-600 hover:to-teal-600 px-4 sm:px-6 py-2 sm:py-3 text-sm sm:text-lg rounded-lg"
+>
+  <PlusCircle className="h-5 sm:h-6 w-5 sm:w-6 mr-2 sm:mr-3" />
+  {t("admin.articles.addArticle")}
+</Button>
+
           </DialogTrigger>
           <DialogContent className="sm:max-w-[600px]">
             <DialogHeader>
