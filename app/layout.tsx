@@ -26,6 +26,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
+      <head>
+        <link rel="icon" href="/logo.png" type="image/png" sizes="any" />
+      </head>
       <body className={inter.className}>
         <LanguageProvider>
           <AuthProvider>

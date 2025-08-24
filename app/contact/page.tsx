@@ -176,24 +176,23 @@ export default function ContactPage() {
 
             {/* Map Placeholder */}
             <Card className="bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-300 shadow-xl">
-              <CardHeader className="bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-t-lg">
-                <CardTitle className="text-2xl">{t("contact.info.location")}</CardTitle>
-              </CardHeader>
-              <CardContent className="p-8">
-                <div className="bg-white/50 backdrop-blur-sm h-64 rounded-lg flex items-center justify-center border-2 border-blue-200">
-                  <div className="text-center text-gray-600">
-                    <MapPin className="h-12 w-12 mx-auto mb-2 text-blue-500" />
-                    <p className="font-medium">
-                      {t("contact.title") === "Get in Touch" ? "Clinic location map" : "Mapa da localização da clínica"}
-                    </p>
-                    <p className="text-sm">
-                      {t("contact.title") === "Get in Touch"
-                        ? "(Google Maps will be integrated here)"
-                        : "(Google Maps será integrado aqui)"}
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
+             <CardHeader className="bg-gradient-to-r from-blue-500 to-teal-500 text-white rounded-t-lg">
+              <CardTitle className="text-2xl">{t("contact.info.location")}</CardTitle>
+             </CardHeader>
+             <CardContent className="p-0">
+              <div className="h-64 w-full">
+              <iframe
+                title="Neurofunção - Location (satellite)"
+                // center on given coords, t=k for satellite, z=18 for zoom, output=embed
+                src="https://www.google.com/maps?q=-28.2679507,-52.418854&z=18&t=k&output=embed"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"/>
+              </div>
+             </CardContent>
             </Card>
 
             {/* Emergency Contact */}
