@@ -27,7 +27,6 @@ export default function RegisterPage() {
   })
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
-  const [debugInfo, setDebugInfo] = useState<any>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -57,7 +56,6 @@ export default function RegisterPage() {
           title: t("register.successTitle") || "Registration Successful!",
           description: t("register.successMessage") || "Your account has been created successfully.",
         })
-        setDebugInfo({ type: 'success', data })
         // Delay redirect so user can see the toast
         setTimeout(() => {
           if (data.is_admin) {
@@ -74,12 +72,10 @@ export default function RegisterPage() {
         } else {
           setError(data.message || t("register.errors.registrationFailed"))
         }
-        setDebugInfo({ type: 'fail', data })
         console.error("Registration failed response:", data)
       }
     } catch (err) {
       setError(t("register.errors.networkError"))
-      setDebugInfo({ type: 'catch', error: err })
       console.error("Registration error (catch block):", err)
     } finally {
       setIsLoading(false)
@@ -163,11 +159,6 @@ export default function RegisterPage() {
             </div>
 
             {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-            {debugInfo && (
-              <pre className="bg-gray-100 text-xs text-left p-2 mt-2 rounded border overflow-x-auto max-h-40">
-                {JSON.stringify(debugInfo, null, 2)}
-              </pre>
-            )}
 
             <Button
               type="submit"

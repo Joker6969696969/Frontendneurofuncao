@@ -35,20 +35,20 @@ export default function HomePage() {
   const { t } = useLanguage()
 
   const galleryImages = [
-    { src: "/placeholder.svg?height=300&width=400", alt: "Recepção" },
-    { src: "/placeholder.svg?height=300&width=400", alt: "Sala de Tratamento 1" },
-    { src: "/placeholder.svg?height=300&width=400", alt: "Sala de Fisioterapia" },
-    { src: "/placeholder.svg?height=300&width=400", alt: "Sala de Tratamento Pediátrico" },
-    { src: "/placeholder.svg?height=300&width=400", alt: "Sala de Espera" },
-    { src: "/placeholder.svg?height=300&width=400", alt: "Fachada da Clínica" },
+    { src: "/Acadimia.jpg?height=300&width=400", alt: "Recepção" },
+    { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Tratamento 1" },
+    { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Fisioterapia" },
+    { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Tratamento Pediátrico" },
+    { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Espera" },
+    { src: "/Acadimia.jpg?height=300&width=400", alt: "Fachada da Clínica" },
   ]
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const heroBackgroundImages = [
-    "/placeholder.svg?height=800&width=1200",
-    "/placeholder.svg?height=800&width=1200",
-    "/placeholder.svg?height=800&width=1200",
+    "/Founders.jpg?height=1000&width=1500",
+    "/Kids3.jpg?height=1000&width=1500",
+    "/Sale.png?height=1000&width=1500",
   ]
 
   useEffect(() => {
@@ -104,60 +104,59 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Section - Orange Gradient Background */}
-      <section className="relative bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 py-20 overflow-hidden">
-        <div className="absolute inset-0 bg-black/10"></div>
-        <div className="absolute top-0 left-0 w-full h-full">
-          {heroBackgroundImages.map((image, index) => (
-            <div
-              key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentImageIndex ? "opacity-30" : "opacity-0"
-              }`}
-            >
-              <Image
-                src={image || "/placeholder.svg"}
-                alt={`Background ${index + 1}`}
-                fill
-                className="object-cover"
-                priority={index === 0}
-              />
-            </div>
-          ))}
-          {/* Overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-orange-500/40 to-teal-500/40"></div>
+      <section className="relative bg-gradient-to-br from-orange-400 via-orange-500 to-orange-600 py-40 overflow-hidden">
+  <div className="absolute inset-0 bg-black/0"></div>
+
+  <div className="absolute top-0 left-0 w-full h-full">
+    {heroBackgroundImages.map((image, index) => (
+      <div
+        key={index}
+        className={`absolute inset-0 transition-opacity duration-1000 ${
+          index === currentImageIndex ? "opacity-80" : "opacity-0"
+        }`}
+      >
+        <Image
+          src={image || "/placeholder.svg"}
+          alt={`Background ${index + 1}`}
+          fill
+          className="object-cover"
+          priority={index === 0}
+        />
+      </div>
+    ))}
+
+    {/* Overlay to ensure text readability */}
+    <div className="absolute inset-0 bg-gradient-to-r from-orange-500/0 to-teal-500/0"></div>
+  </div>
+
+  <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="space-y-6 text-white">
+        <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">{t("home.hero.title")}</h1>
+        <h2 className="text-xl md:text-2xl font-medium opacity-95">{t("home.hero.subtitle")}</h2>
+        <p className="text-lg leading-relaxed opacity-90">{t("home.hero.description")}</p>
+
+        <div className="flex flex-col sm:flex-row gap-4">
+          <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 shadow-lg">
+            {t("home.hero.cta1")}
+          </Button>
+
+          <Button
+            size="lg"
+            variant="outline"
+            className="border-white text-white hover:bg-white hover:text-orange-600 bg-transparent"
+          >
+            {t("home.hero.cta2")}
+          </Button>
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 text-white">
-              <h1 className="text-4xl md:text-6xl font-bold drop-shadow-lg">{t("home.hero.title")}</h1>
-              <h2 className="text-xl md:text-2xl font-medium opacity-95">{t("home.hero.subtitle")}</h2>
-              <p className="text-lg leading-relaxed opacity-90">{t("home.hero.description")}</p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 shadow-lg">
-                  {t("home.hero.cta1")}
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="border-white text-white hover:bg-white hover:text-orange-600 bg-transparent"
-                >
-                  {t("home.hero.cta2")}
-                </Button>
-              </div>
-            </div>
-            <div className="relative">
-              <Image
-                src="/placeholder.svg?height=500&width=600"
-                alt="Equipe Médica"
-                width={600}
-                height={500}
-                className="rounded-lg shadow-2xl"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      </div>
+
+      
+    </div>
+  </div>
+</section>
+
+
 
       {/* Founders Section - Light Teal Background */}
       <section className="relative py-20 bg-gray-100 overflow-hidden">
@@ -189,7 +188,7 @@ export default function HomePage() {
               <CardContent className="p-8">
                 <div className="relative mb-6">
                   <Image
-                    src="/placeholder.svg?height=300&width=300"
+                    src="/Bernando.avif?height=300&width=300"
                     alt={t("home.founders.doctor1.name")}
                     width={300}
                     height={300}
@@ -207,7 +206,7 @@ export default function HomePage() {
               <CardContent className="p-8">
                 <div className="relative mb-6">
                   <Image
-                    src="/placeholder.svg?height=300&width=300"
+                    src="/Pamela.avif?height=300&width=300"
                     alt={t("home.founders.doctor2.name")}
                     width={300}
                     height={300}
@@ -225,7 +224,7 @@ export default function HomePage() {
               <CardContent className="p-8">
                 <div className="relative mb-6">
                   <Image
-                    src="/placeholder.svg?height=300&width=300"
+                    src="/Patricia.avif?height=300&width=300"
                     alt={t("home.founders.doctor3.name")}
                     width={300}
                     height={300}
@@ -369,7 +368,7 @@ export default function HomePage() {
                   </p>
                   <div className="flex items-center">
                     <Image
-                      src={`/placeholder.svg?height=50&width=50&query=patient testimonial portrait ${i + 1}`}
+                      src={`/Woman4.png?height=50&width=50&query=patient testimonial portrait ${i + 1}`}
                       alt="Paciente"
                       width={50}
                       height={50}
