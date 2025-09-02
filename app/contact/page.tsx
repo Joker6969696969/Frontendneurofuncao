@@ -19,6 +19,19 @@ export default function ContactPage() {
     message: "",
   })
 
+  const contactAnimatedIcons = [
+    { icon: MapPin, top: "10%", left: "5%", size: "h-16 w-16", delay: "delay-100" },
+    { icon: Phone, top: "20%", right: "10%", size: "h-12 w-12", delay: "delay-300" },
+    { icon: Mail, bottom: "15%", left: "15%", size: "h-20 w-20", delay: "delay-500" },
+    { icon: Clock, top: "50%", left: "25%", size: "h-14 w-14", delay: "delay-700" },
+    { icon: Send, bottom: "5%", right: "20%", size: "h-18 w-18", delay: "delay-900" },
+    { icon: MapPin, top: "30%", right: "30%", size: "h-10 w-10", delay: "delay-1100" },
+    { icon: Phone, top: "40%", left: "10%", size: "h-16 w-16", delay: "delay-200" },
+    { icon: Mail, bottom: "25%", right: "5%", size: "h-12 w-12", delay: "delay-400" },
+    { icon: Clock, top: "60%", right: "15%", size: "h-20 w-20", delay: "delay-600" },
+    { icon: Send, bottom: "10%", left: "30%", size: "h-14 w-14", delay: "delay-800" },
+  ];
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission
@@ -33,8 +46,24 @@ export default function ContactPage() {
   }
 
   return (
-    <div className="min-h-screen py-12 bg-gradient-to-br from-orange-50 via-white to-teal-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 bg-gradient-to-br from-orange-50 via-white to-teal-50 relative overflow-hidden">
+      {/* Animated Background Icons */}
+      <div className="absolute inset-0 z-0 opacity-30">
+        {contactAnimatedIcons.map((item, index) => (
+          <item.icon
+            key={index}
+            className={`absolute text-blue-300 animate-float-smooth ${item.size} ${item.delay}`}
+            style={{
+              top: item.top,
+              left: item.left,
+              right: item.right,
+              bottom: item.bottom,
+              animationDuration: `${3 + index * 0.5}s`,
+            }}
+          />
+        ))}
+      </div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{t("contact.title")}</h1>
