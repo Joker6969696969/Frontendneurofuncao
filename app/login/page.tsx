@@ -29,6 +29,9 @@ export default function LoginPage() {
     setError(null)
     setIsLoading(true)
 
+    // Log the API URL being used
+    console.log("Attempting to log in using API_BASE_URL:", API_BASE_URL);
+
     try {
       const response = await fetch(`${API_BASE_URL}/login`, {
         method: "POST",
@@ -50,10 +53,10 @@ export default function LoginPage() {
       } else {
         setError(data.message || t("login.errors.invalidCredentials"))
       }
-    } catch (err) {
-      setError(t("login.errors.networkError"))
-      console.error("Login error:", err)
-    } finally {
+    } catch (err: any) {
+      console.error("Login error:", err);
+      const errorMessage = err.message || t("login.errors.networkError");
+      setError(`Failed to log in: ${errorMessage}. Attempted URL: ${API_BASE_URL}`);
       setIsLoading(false)
     }
   }
@@ -104,7 +107,7 @@ export default function LoginPage() {
               />
             </div>
 
-            {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+            {error && <p className="text-sm text-red-500 mt-2 text-center">{error}</p>}
 
             <Button
               type="submit"
