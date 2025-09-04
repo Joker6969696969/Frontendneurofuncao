@@ -148,7 +148,15 @@ export default function ArticlePage() {
         </div>
 
         {/* Article Body (Full Content) */}
-        <div className="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-12" dangerouslySetInnerHTML={{ __html: article.body }} />
+        <div
+          className="prose prose-lg max-w-none text-gray-800 leading-relaxed mb-12"
+          dangerouslySetInnerHTML={{
+            __html: article.body
+              .split(/\r?\n/)
+              .map((line) => `<p>${line}</p>`)
+              .join(""),
+          }}
+        />
       </div>
     </div>
   )

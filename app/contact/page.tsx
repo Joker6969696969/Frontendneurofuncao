@@ -193,10 +193,7 @@ export default function ContactPage() {
                     </h3>
                     <p className="text-gray-700">{t("contact.info.hours")}</p>
                     <p className="text-gray-700">
-                      {t("contact.title") === "Get in Touch" ? "Saturday: 8am to 12pm" : "Sábado: 8h às 12h"}
-                    </p>
-                    <p className="text-gray-700">
-                      {t("contact.title") === "Get in Touch" ? "Sunday: Closed" : "Domingo: Fechado"}
+                      {t("contact.title") === "Get in Touch" ? "Saturday and Sunday: Closed" : "Sábado e Domingo: Fechado"}
                     </p>
                   </div>
                 </div>

@@ -29,17 +29,17 @@ export const translations = {
         doctor1: {
           name: "Bernardo Amarante de Lara",
           specialty: "Fisioterapeuta",
-          description: "Especialista em distúrbios neurológicos infantis com mais de 15 anos de experiência.",
+          description: "Experiência em Fisioterapia Neurofuncional, Fisioterapia Vestibular e Fisioterapia Ocular, com ênfase no Comportamento Motor Humano.",
         },
         doctor2: {
           name: "Pamela Souto Piccinini",
           specialty: "Fonoaudióloga",
-          description: "Especializada em reabilitação neurológica e desenvolvimento motor.",
+          description: "Fonoaudióloga altamente experiente, especializada em apraxia infantil, intervenções em TEA e transtornos moto-da fala.",
         },
         doctor3: {
           name: "Patrícia Brum Fagundes",
           specialty: "Terapeuta Ocupacional",
-          description: "Especialista em avaliação e intervenção em distúrbios do desenvolvimento.",
+          description: "Especialista em avaliação e intervenção em distúrbios do desenvolvimento. Internationally trained in sensory processing and early intervention.",
         },
       },
       gallery: {
@@ -49,6 +49,21 @@ export const translations = {
       testimonials: {
         title: "Depoimentos",
         subtitle: "O que nossos pacientes dizem sobre nós",
+        testimonial1: {
+          content: "Excelente atendimento e profissionais muito competentes. Meu filho teve uma melhora significativa após o tratamento.",
+          name: "Maria Silva",
+          role: "Mãe de paciente",
+        },
+        testimonial2: {
+          content: "A equipe é muito atenciosa e dedicada. Senti uma grande evolução no meu tratamento de fisioterapia.",
+          name: "Gisela Menezes",
+          role: "Paciente de fisioterapia",
+        },
+        testimonial3: {
+          content: "A Neurofunção oferece um ambiente acolhedor e seguro, que faz toda a diferença para o desenvolvimento do meu filho.",
+          name: "Ana Oliveira",
+          role: "Mãe de paciente",
+        },
       },
       whatsapp: {
         message: "Olá! Posso ajudá-lo com alguma coisa?",
@@ -280,17 +295,17 @@ export const translations = {
         doctor1: {
           name: "Bernardo Amarante de Lara",
           specialty: "Physiotherapist",
-          description: "Specialist in pediatric neurological disorders with over 15 years of experience.",
+          description: "Experience in Neurofunctional Physiotherapy, Vestibular Physiotherapy and Ocular Physiotherapy, with an emphasis on Human Motor Behavior.",
         },
         doctor2: {
           name: "Pamela Souto Piccinini",
           specialty: " Speech Therapist",
-          description: "Specialized in neurological rehabilitation and motor development.",
+          description: "Highly experienced speech therapist specializing in childhood apraxia, ASD interventions and motor-speech disorders.",
         },
         doctor3: {
           name: "Patrícia Brum Fagundes",
           specialty: "Occupational Therapist",
-          description: "Specialist in assessment and intervention in developmental disorders.",
+          description: "Terapeuta ocupacional especializada em Transtorno do Espectro do Autismo e no Conceito Neuroevolutivo Bobath. Formada internacionalmente em processamento sensorial e intervenção precoce",
         },
       },
       gallery: {
@@ -300,6 +315,21 @@ export const translations = {
       testimonials: {
         title: "Testimonials",
         subtitle: "What our patients say about us",
+        testimonial1: {
+          content: "Excellent care and very competent professionals. My son showed significant improvement after treatment.",
+          name: "Maria Silva",
+          role: "Patient's Mother",
+        },
+        testimonial2: {
+          content: "The team is very attentive and dedicated. I felt a great evolution in my physiotherapy treatment.",
+          name: "Gisela Menezes",
+          role: "Physiotherapy Patient",
+        },
+        testimonial3: {
+          content: "Neurofunção offers a welcoming and safe environment, which makes all the difference for my child's development.",
+          name: "Ana Oliveira",
+          role: "Patient's Mother",
+        },
       },
       whatsapp: {
         message: "Hello! Can I help you with something?",

@@ -37,10 +37,10 @@ export default function HomePage() {
   const galleryImages = [
     { src: "/Acadimia.jpg?height=300&width=400", alt: "Recepção" },
     { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Tratamento 1" },
-    { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Fisioterapia" },
-    { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Tratamento Pediátrico" },
+    { src: "/Clinic2.jpg?height=300&width=400", alt: "Sala de Fisioterapia" },
+    { src: "/Clinic3.jpg?height=300&width=400", alt: "Sala de Tratamento Pediátrico" },
     { src: "/Acadimia.jpg?height=300&width=400", alt: "Sala de Espera" },
-    { src: "/Acadimia.jpg?height=300&width=400", alt: "Fachada da Clínica" },
+    { src: "/Clinic.jpg?height=300&width=400", alt: "Fachada da Clínica" },
   ]
 
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -137,17 +137,11 @@ export default function HomePage() {
         <p className="text-lg leading-relaxed opacity-90">{t("home.hero.description")}</p>
 
         <div className="flex flex-col sm:flex-row gap-4">
-          <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 shadow-lg">
-            {t("home.hero.cta1")}
-          </Button>
-
-          <Button
-            size="lg"
-            variant="outline"
-            className="border-white text-white hover:bg-white hover:text-orange-600 bg-transparent"
-          >
-            {t("home.hero.cta2")}
-          </Button>
+          <Link href="/contact">
+            <Button size="lg" className="bg-white text-orange-600 hover:bg-gray-100 shadow-lg">
+              {t("home.hero.cta1")}
+            </Button>
+          </Link>
         </div>
       </div>
 
@@ -348,9 +342,30 @@ export default function HomePage() {
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
-              { bg: "bg-gradient-to-br from-orange-100 to-orange-200", border: "border-orange-300" },
-              { bg: "bg-gradient-to-br from-teal-100 to-teal-200", border: "border-teal-300" },
-              { bg: "bg-gradient-to-br from-blue-100 to-blue-200", border: "border-blue-300" },
+              {
+                bg: "bg-gradient-to-br from-orange-100 to-orange-200",
+                border: "border-orange-300",
+                content: "home.testimonials.testimonial1.content",
+                name: "home.testimonials.testimonial1.name",
+                role: "home.testimonials.testimonial1.role",
+                image: "/Woman4.png",
+              },
+              {
+                bg: "bg-gradient-to-br from-teal-100 to-teal-200",
+                border: "border-teal-300",
+                content: "home.testimonials.testimonial2.content",
+                name: "home.testimonials.testimonial2.name",
+                role: "home.testimonials.testimonial2.role",
+                image: "/Woman2.png",
+              },
+              {
+                bg: "bg-gradient-to-br from-blue-100 to-blue-200",
+                border: "border-blue-300",
+                content: "home.testimonials.testimonial3.content",
+                name: "home.testimonials.testimonial3.name",
+                role: "home.testimonials.testimonial3.role",
+                image: "/Woman4.png",
+              },
             ].map((style, i) => (
               <Card
                 key={i}
@@ -363,20 +378,19 @@ export default function HomePage() {
                     ))}
                   </div>
                   <p className="text-gray-700 mb-4 font-medium">
-                    "Excelente atendimento e profissionais muito competentes. Meu filho teve uma melhora significativa
-                    após o tratamento."
+                    {t(style.content)}
                   </p>
                   <div className="flex items-center">
                     <Image
-                      src={`/Woman4.png?height=50&width=50&query=patient testimonial portrait ${i + 1}`}
-                      alt="Paciente"
+                      src={`${style.image}?height=50&width=50&query=patient testimonial portrait ${i + 1}`}
+                      alt={t(style.name)}
                       width={50}
                       height={50}
                       className="rounded-full mr-4"
                     />
                     <div>
-                      <p className="font-semibold text-gray-900">Maria Silva</p>
-                      <p className="text-sm text-gray-600">Mãe de paciente</p>
+                      <p className="font-semibold text-gray-900">{t(style.name)}</p>
+                      <p className="text-sm text-gray-600">{t(style.role)}</p>
                     </div>
                   </div>
                 </CardContent>
