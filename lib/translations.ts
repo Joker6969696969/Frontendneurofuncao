@@ -39,7 +39,7 @@ export const translations = {
         doctor3: {
           name: "Patrícia Brum Fagundes",
           specialty: "Terapeuta Ocupacional",
-          description: "Especialista em avaliação e intervenção em distúrbios do desenvolvimento. Internationally trained in sensory processing and early intervention.",
+          description: "Terapeuta ocupacional especializada em Transtorno do Espectro do Autismo e no Conceito Neuroevolutivo Bobath. Formada internacionalmente em processamento sensorial e intervenção precoce.",
         },
       },
       gallery: {
@@ -305,7 +305,7 @@ export const translations = {
         doctor3: {
           name: "Patrícia Brum Fagundes",
           specialty: "Occupational Therapist",
-          description: "Terapeuta ocupacional especializada em Transtorno do Espectro do Autismo e no Conceito Neuroevolutivo Bobath. Formada internacionalmente em processamento sensorial e intervenção precoce",
+          description: "TerapeutOccupational therapist specialized in Autism Spectrum Disorder and in the Bobath Neurodevelopmental Concept. Internationally trained in sensory processing and early intervention.a ocupacional especializada em Transtorno do Espectro do Autismo e no Conceito Neuroevolutivo Bobath. Formada internacionalmente em processamento sensorial e intervenção precoce.",
         },
       },
       gallery: {
